@@ -3,22 +3,20 @@ import UIKit
 final class TabBarController: UITabBarController {
 
     var servicesAssembly: ServicesAssembly!
-
-    private let catalogTabBarItem = UITabBarItem(
-        title: NSLocalizedString("Tab.catalog", comment: ""),
-        image: UIImage(systemName: "square.stack.3d.up.fill"),
+    
+    private let profileTabBarItem = UITabBarItem(
+        title: "Профиль",
+        image: UIImage(named: "Profile"),
         tag: 0
     )
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let profileViewController = ProfileViewController(servicesAssembly: servicesAssembly)
+        profileViewController.tabBarItem = profileTabBarItem
 
-        let catalogController = TestCatalogViewController(
-            servicesAssembly: servicesAssembly
-        )
-        catalogController.tabBarItem = catalogTabBarItem
-
-        viewControllers = [catalogController]
+        viewControllers = [profileViewController]
 
         view.backgroundColor = .systemBackground
     }
