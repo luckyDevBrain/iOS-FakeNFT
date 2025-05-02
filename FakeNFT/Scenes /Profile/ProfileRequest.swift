@@ -2,17 +2,12 @@ import Foundation
 
 struct ProfileRequest: NetworkRequest {
 
-    var endpoint: URL? {
-        URL(string: "\(RequestConstants.baseURL)/api/v1/profile/1")
-    }
-
+    var endpoint: URL? = URL(string: "\(RequestConstants.baseURL)/api/v1/profile/1")
     var dto: Dto? { nil }
 }
 
 struct ProfilePutRequest: NetworkRequest {
-    var endpoint: URL? {
-        URL(string: "\(RequestConstants.baseURL)/api/v1/profile/1")
-    }
+    var endpoint: URL? = URL(string: "\(RequestConstants.baseURL)/api/v1/profile/1")
     var httpMethod: HttpMethod = .put
     var dto: Dto?
 
@@ -36,7 +31,7 @@ struct ProfileDtoObject: Dto {
     }
 
     func asDictionary() -> [String: String] {
-        return [
+        [
             CodingKeys.name.rawValue: name.isEmpty ? "" : name,
             CodingKeys.description.rawValue: description.isEmpty ? "" : description,
             CodingKeys.website.rawValue: website.isEmpty ? "" : website,
