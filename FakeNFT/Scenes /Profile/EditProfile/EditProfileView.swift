@@ -119,18 +119,11 @@ final class EditProfileView: UIView {
     
     private func setupViews() {
         backgroundColor = .white
-        closeButton.translatesAutoresizingMaskIntoConstraints = false
-        profileAvatar.translatesAutoresizingMaskIntoConstraints = false
-        profileAvatarButton.translatesAutoresizingMaskIntoConstraints = false
-        loadImageButton.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameTextView.translatesAutoresizingMaskIntoConstraints = false
-        userInfoLabel.translatesAutoresizingMaskIntoConstraints = false
-        infoTextView.translatesAutoresizingMaskIntoConstraints = false
-        userSiteLabel.translatesAutoresizingMaskIntoConstraints = false
-        siteTextView.translatesAutoresizingMaskIntoConstraints = false
         
-        [closeButton, profileAvatar, profileAvatarButton, loadImageButton, nameLabel, nameTextView, userInfoLabel, infoTextView, userSiteLabel, siteTextView].forEach { addSubview($0) }
+        [closeButton, profileAvatar, profileAvatarButton, loadImageButton, nameLabel, nameTextView, userInfoLabel, infoTextView, userSiteLabel, siteTextView].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            addSubview($0)
+        }
     }
     
     private func setupConstraints() {
@@ -192,10 +185,6 @@ final class EditProfileView: UIView {
         return true
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     
     @objc private func hideKeyboard() {
         endEditing(true)
@@ -203,11 +192,11 @@ final class EditProfileView: UIView {
     
     @objc private func keyboardWillShow(notification: Notification) {
         guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-        self.frame.origin.y = -keyboardFrame.height / 2
+        frame.origin.y = -keyboardFrame.height / 2
     }
     
     @objc private func keyboardWillHide(notification: Notification) {
-        self.frame.origin.y = 0
+        frame.origin.y = 0
     }
     
     
