@@ -2,10 +2,10 @@ import UIKit
 
 final class ProfileView: UIView {
     
-    var websiteLabelTapped: ((String) -> Void)?
+    private let likesStorage = LikesStorageImpl.shared
     private var nftsCount: Int = 0
     private var likesCount: Int = 0
-    
+    var websiteLabelTapped: ((String) -> Void)?
     var favoritesTapped: (() -> Void)?
     var aboutDeveloper: ((String) -> Void)?
     var myNFTTapped: (() -> Void)?
@@ -106,7 +106,7 @@ final class ProfileView: UIView {
             
             userNameLabel.centerYAnchor.constraint(equalTo: profileAvatar.centerYAnchor),
             userNameLabel.leadingAnchor.constraint(equalTo: profileAvatar.trailingAnchor, constant: 16),
-                 
+            
             
             profileInfoLabel.topAnchor.constraint(equalTo: profileAvatar.bottomAnchor, constant: Constraints.infoTopSpacing),
             profileInfoLabel.leadingAnchor.constraint(equalTo: profileContainerView.leadingAnchor),
@@ -154,6 +154,12 @@ final class ProfileView: UIView {
         profileTableView.reloadData()
         
     }
+    
+    func updateLikesCountAndUI() {
+        let likes = likesStorage.getAllLikes()
+        likesCount = likes.count
+        profileTableView.reloadData()
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -190,7 +196,6 @@ extension ProfileView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row {
         case 0:
             if let myNFTTapped = myNFTTapped {
