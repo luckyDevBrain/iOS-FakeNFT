@@ -1,7 +1,7 @@
 import Foundation
 
 struct ProfileRequest: NetworkRequest {
-
+    
     var endpoint: URL? = URL(string: "\(RequestConstants.baseURL)/api/v1/profile/1")
     var dto: Dto? { nil }
 }
@@ -10,20 +10,20 @@ struct ProfilePutRequest: NetworkRequest {
     var endpoint: URL? = URL(string: "\(RequestConstants.baseURL)/api/v1/profile/1")
     var httpMethod: HttpMethod = .put
     var dto: Dto?
-
+    
     init(dto: ProfileDtoObject) {
         self.dto = dto
     }
 }
 
 struct ProfileDtoObject: Dto {
-
+    
     let name: String
     let description: String
     let website: String
     let avatar: String
     let likes: [String]
-
+    
     enum CodingKeys: String, CodingKey {
         case name
         case description
@@ -31,7 +31,7 @@ struct ProfileDtoObject: Dto {
         case avatar
         case likes
     }
-
+    
     func asDictionary() -> [String: String] {
         [
             CodingKeys.name.rawValue: name.isEmpty ? "" : name,

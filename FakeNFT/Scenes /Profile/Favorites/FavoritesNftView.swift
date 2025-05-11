@@ -21,7 +21,6 @@ final class FavoritesNftView: UIView {
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 20
         layout.minimumInteritemSpacing = 7
         layout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
